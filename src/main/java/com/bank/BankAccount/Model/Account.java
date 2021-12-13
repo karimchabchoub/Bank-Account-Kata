@@ -102,7 +102,7 @@ public class Account extends Bank{
 	public void consultPreviousOperations(Client client) {
 
 		log.info("--- Welcome to bank " + getBankName() + " ---");
-		log.info("--- Account operations log started = " + getAccountId() + " for " + client.getClientName() + " ---");
+		log.info("--- Account operations for account " + getAccountId() + " and client " + client.getClientName() + " ---");
 
 		StringBuilder accountLog = new StringBuilder();
 		
@@ -127,8 +127,6 @@ public class Account extends Bank{
 		// do retrieve if you have enough money else return a warning message
 		if(balanceBeforeOperation > amount) {
 			
-			log.info(" Valid request : ");
-			
 			Double balanceAfterOperation = getBalance() - amount;
 			setBalance(balanceAfterOperation);
 			Operation operation = new Operation(getNewId(),
@@ -138,6 +136,7 @@ public class Account extends Bank{
 			checkIfAnotherOperationHasTheSameId(operation);
 			saveNewOperation(operation);
 			log.info(" Done with success. New Balance is : " + balanceAfterOperation);
+		
 		} else {
 			log.warn(ClientAccountsConstants.AMOUNT_EXCEED_BALANCE);
 		}
@@ -147,7 +146,7 @@ public class Account extends Bank{
 	// Function that allows client to deposit an amount to his account  
 	public void makeADeposit(Double amount) {
 
-		log.info("--- Make a desposit for client " + getClient().getClientName() + " and account " + getAccountType());
+		log.info("--- Make a desposit for client " + getClient().getClientName() + " in the " + getAccountType());
 
 		Double balanceBeforeOperation = getBalance();
 		Double balanceAfterOperation = getBalance() + amount;
